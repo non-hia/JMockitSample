@@ -2,7 +2,8 @@ package sample.jmockit;
 
 import static org.junit.Assert.*;
 import mockit.Expectations;
-import mockit.Mocked;
+import mockit.Injectable;
+import mockit.Tested;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,13 +13,13 @@ import sample.jmockit.TestTarget;
 
 public class JMockitSampleTest {
 
+	@Tested
 	private TestTarget testTarget;
-	@Mocked
+	@Injectable
 	private JMockSample jMockSampleMock;
 	
 	@Before
 	public void setUp() throws Exception {
-		testTarget = new TestTarget();
 	}
 
 	@Test
@@ -30,7 +31,7 @@ public class JMockitSampleTest {
 			}
 		};
 		
-		assertEquals(testTarget.get(jMockSampleMock), "Sample");
+		assertEquals(testTarget.get(), "Sample");
 	}
 
 	@Test
@@ -42,7 +43,7 @@ public class JMockitSampleTest {
 			}
 		};
 		
-		assertEquals(testTarget.get(jMockSampleMock), "JMock");
+		assertEquals(testTarget.get(), "JMock");
 	}
 	
 	@Test
@@ -55,7 +56,7 @@ public class JMockitSampleTest {
 		};
 		
 		try {
-			testTarget.get(jMockSampleMock);
+			testTarget.get();
 			fail();
 		} catch (IllegalStateException e) {
 			assertEquals(e.getMessage(), "test");

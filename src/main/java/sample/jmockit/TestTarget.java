@@ -2,7 +2,9 @@ package sample.jmockit;
 
 public class TestTarget {
 
-	public String get(JMockSample jMockSample) {
+	private JMockSample jMockSample;
+	
+	public String get() {
 		return jMockSample.is() ? "JMock" : "Sample";
 	}
 }
